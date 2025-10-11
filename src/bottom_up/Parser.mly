@@ -55,7 +55,13 @@ clauses:
 
 clause:
   | literal DOT { AST.Clause ($1, []) }
-  | literal IF literals DOT { AST.Clause ($1, $3) }
+  | literal IF signed_literals DOT 
+    { 
+        print_endline "test if working";
+        let pos_literals, neg_literals = $3 in
+        let neg_literals = List.map AST.neg_hack neg_literals in
+        AST.Clause ($1, pos_literals @ neg_literals) 
+    }
 
 literals:
   | literal { [$1] }

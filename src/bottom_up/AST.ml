@@ -17,4 +17,5 @@ and query =
   | Query of term list * literal list * literal list
   (** Query: projection, positive lits, negative lits *)
 
-(* TODO: negation in body *)
+
+let neg_hack (Atom (s, t)) = Atom ("#NEG" ^ s, t)

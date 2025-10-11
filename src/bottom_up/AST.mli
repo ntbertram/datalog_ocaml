@@ -15,3 +15,4 @@ and query =
   | Query of term list * literal list * literal list
   (** Query: projection, positive lits, negative lits *)
 
+val neg_hack: literal -> literal
