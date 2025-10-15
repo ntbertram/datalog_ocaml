@@ -46,7 +46,7 @@ module type S = sig
   type symbol
     (** Abstract type of symbols (individual objects) *)
 
-  type term = private
+  type term = 
     | Var of int
     | Const of symbol
     (** Individual object *)
@@ -904,6 +904,8 @@ module Make(Symbol : SymbolType) : S with type symbol = Symbol.t = struct
       db_queue = Queue.create ();
     }
 
+
+
   let db_copy db =
     { db_all = ClauseHashtbl.copy db.db_all;
       db_facts = ClausesIndex.copy db.db_facts;
@@ -1517,3 +1519,4 @@ module Hashcons(S : SymbolType) = struct
     let y = W.merge __table x in
     y
 end
+

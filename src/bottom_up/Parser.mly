@@ -55,6 +55,12 @@ clauses:
 
 clause:
   | literal DOT { AST.Clause ($1, []) }
+  | IF signed_literals DOT
+     { 
+        let pos_literals, neg_literals = $2 in
+        let neg_literals = List.map AST.neg_hack neg_literals in
+        AST.Clause (AST.Atom ("FAIL", []), pos_literals @ neg_literals) 
+    }
   | literal IF signed_literals DOT 
     { 
         let pos_literals, neg_literals = $3 in

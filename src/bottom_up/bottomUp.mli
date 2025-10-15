@@ -51,7 +51,7 @@ module type S = sig
   type symbol
     (** Abstract type of symbols (individual objects) *)
 
-  type term = private
+  type term = 
     | Var of int
     | Const of symbol
     (** Individual object *)
