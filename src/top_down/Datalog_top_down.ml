@@ -457,7 +457,7 @@ module Make(Const : CONST) = struct
 
   type const = Const.t
 
-  let _debug_enabled = ref false
+  let _debug_enabled = ref true
 
   let _debug_real k =
     k (fun fmt ->
