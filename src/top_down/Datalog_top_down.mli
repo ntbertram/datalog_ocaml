@@ -39,7 +39,7 @@ module type S = sig
   (** {2 Terms} *)
 
   module T : sig
-    type t = private
+    type t =
     | Var of int
     | Apply of const * t array
 
