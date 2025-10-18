@@ -108,7 +108,7 @@ module type S = sig
   (** {2 Clauses} *)
 
   module C : sig
-    type t = private {
+    type t = {
       head : T.t;
       body : Lit.t list;
     }
