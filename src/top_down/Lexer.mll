@@ -43,7 +43,7 @@ rule token =
       | multi_line_comment_unclosed  { fail () }
           (* end of input - for channels, strings, ... *)
       | eof                          { EOI }
-      | "~"                          { NOT }
+      | "not"                          { NOT }
       | '('                          { LEFT_PARENTHESIS }
       | ')'                          { RIGHT_PARENTHESIS }
       | '.'                          { DOT }

@@ -78,8 +78,8 @@ literals:
   | literal COMMA literals { $1 :: $3 }
 
 literal:
-  | NOT atom { AST.LitNeg $2 }
   | atom { AST.LitPos $1 }
+  | NOT atom { AST.LitNeg $2 }
   | subterm AGGR_EQUAL LOWER_WORD UPPER_WORD COLON term
     { AST.(LitAggr
       { ag_left=$1; ag_constructor= $3; ag_var= $4; ag_guard= $6}
