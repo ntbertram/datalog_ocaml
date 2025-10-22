@@ -1563,7 +1563,7 @@ module Make(Const : CONST) = struct
       DB.find_facts ~oc:query.oc query.db 1 goal_entry.goal 0
         (fun _fact subst ->
           let renaming = _get_renaming ~query in
-          let answer = Subst.eval subst ~renaming goal_entry.goal 0 in
+          let answer = Subst.eval subst ~renaming goal_entry.goal 1 in
           (* process the new answer to the goal *)
           slg_answer ~query goal_entry answer);
       (* resolve with rules *)
