@@ -1544,6 +1544,7 @@ module Make(Const : CONST) = struct
         TVariantTbl.find query.forest goal
       with Not_found ->
         (* new goal! insert it in the forest, and start solving it *)
+        (*_debug (fun k->k "slg_solve goal not found: %a" T.fmt goal);*)
         let goal_entry = {
           goal;
           answers = T.Tbl.create 7;
@@ -1560,10 +1561,10 @@ module Make(Const : CONST) = struct
        obtain its answers *)
     and slg_subgoal ~query goal_entry =
       _debug (fun k->k "slg_subgoal with %a" T.fmt goal_entry.goal);
-      DB.find_facts ~oc:query.oc query.db 1 goal_entry.goal 0
+      DB.find_facts ~oc:query.oc query.db 0 goal_entry.goal 1
         (fun _fact subst ->
           let renaming = _get_renaming ~query in
-          let answer = Subst.eval subst ~renaming goal_entry.goal 1 in
+          let answer = Subst.eval subst ~renaming goal_entry.goal 0 in
           (* process the new answer to the goal *)
           slg_answer ~query goal_entry answer);
       (* resolve with rules *)
