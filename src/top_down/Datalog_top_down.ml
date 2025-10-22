@@ -1573,7 +1573,7 @@ module Make(Const : CONST) = struct
           let renaming = _get_renaming ~query in
           let clause' = Subst.eval_clause subst ~renaming clause 1 in
           (* add a new clause to the forest of [goal] *)
-        _debug (fun k->k "slg_subgoal %a with new clause %a" T.fmt goal_entry.goal C.fmt clause);
+        _debug (fun k->k "slg_subgoal %a with new clause %a" T.fmt goal_entry.goal C.fmt clause');
           query.stack <- NewClause (goal_entry, clause', query.stack));
       (* resolve with interpreters *)
       DB.find_interpretation ~oc:query.oc query.db 1 goal_entry.goal 0
@@ -1622,7 +1622,7 @@ module Make(Const : CONST) = struct
             | None -> ()
             | Some clause'' ->
               (* resolution succeeded, add clause to the forest of [goal'] *)
-              _debug (fun k->k "slg_answer %a with new clause %a" T.fmt goal_entry.goal C.fmt clause);
+              _debug (fun k->k "slg_answer %a with new clause %a" T.fmt goal'.goal C.fmt clause'');
               query.stack <- NewClause (goal', clause'', query.stack))
           goal_entry.poss;
       end
@@ -1639,7 +1639,7 @@ module Make(Const : CONST) = struct
         (fun ans () -> match resolve ~query ans clause with
           | None -> ()
           | Some clause' ->
-            _debug (fun k->k "slg_positive %a with new clause %a" T.fmt goal_entry.goal C.fmt clause);
+            _debug (fun k->k "slg_positive %a with new clause %a" T.fmt goal_entry.goal C.fmt clause');
             query.stack <- NewClause(goal_entry, clause', query.stack))
         subgoal_entry.answers;
       ()
