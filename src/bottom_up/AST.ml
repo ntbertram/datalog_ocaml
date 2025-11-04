@@ -18,4 +18,4 @@ and query =
   (** Query: projection, positive lits, negative lits *)
 
 
-let neg_hack (Atom (s, t)) = Atom ("NEG" ^ s, t)
+let neg_hack (Atom (s, t)) = Atom ("NEG_" ^ s, t)
