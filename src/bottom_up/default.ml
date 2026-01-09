@@ -44,6 +44,9 @@ let literal_of_ast ?(tbl=mk_vartbl ()) lit = match lit with
     let s = StringSymbol.make s in
     let args = List.map (term_of_ast ~tbl) args in
     mk_literal s args
+  | _ -> failwith "Not supported"
+
+ 
 
 let clause_of_ast c = match c with
   | A.Clause (a, l) ->

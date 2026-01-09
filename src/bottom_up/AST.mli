@@ -1,5 +1,14 @@
 
 (* this file is part of datalog. See README for the license *)
+type comparison =
+    | Geq
+    | Leq
+    | Eq
+    | Neq
+    | Lt
+    | Gt
+
+
 
 type file = clause list
   (** Toplevel statement *)
@@ -7,6 +16,7 @@ and clause =
   | Clause of literal * literal list
 and literal =
   | Atom of string * term list
+  | Comp of term * comparison * term
 and term =
   | Var of string
   | Const of string

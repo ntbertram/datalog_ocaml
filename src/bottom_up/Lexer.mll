@@ -34,6 +34,12 @@ rule token =
       | ['\n']                       { Lexing.new_line lexbuf;
                                        token lexbuf } (* skip new lines *)
       | "not"                        { NOT }
+      | ">"                          { GT }
+      | "<"                          { LT }
+      | ">="                         { GEQ }
+      | ">="                          { LEQ }
+      | "!="                         { NEQ }
+      | "="                          { EQ }
       | one_line_comment             { Lexing.new_line lexbuf;
                                        token lexbuf } (* skip comment *)
       | multi_line_comment           { String.iter (function

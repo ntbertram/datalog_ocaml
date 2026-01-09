@@ -10,6 +10,12 @@ this file is part of datalog. See README for the license
 %token DOT
 %token IF
 %token NOT
+%token LEQ
+%token GEQ
+%token NEQ
+%token LT
+%token GT
+%token EQ
 %token COMMA
 %token EOI
 %token <string> SINGLE_QUOTED
@@ -72,7 +78,16 @@ literals:
   | literal { [$1] }
   | literal COMMA literals { $1 :: $3 }
 
+comp:
+    | LEQ { AST.Leq }
+    | GEQ { AST.Geq }
+    | NEQ { AST.Neq }
+    | EQ { AST.Eq }
+    | LT { AST.Lt }
+    | GT { AST.Gt }
+
 literal:
+  | term comp term { AST.Comp ($1, $2, $3) }
   | LOWER_WORD { AST.Atom ($1, []) }
   | LOWER_WORD LEFT_PARENTHESIS args RIGHT_PARENTHESIS
     { AST.Atom ($1, $3) }
